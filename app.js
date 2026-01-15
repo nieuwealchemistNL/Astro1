@@ -488,9 +488,10 @@ for (let p = 6; p <= totalPages; p++) {
     );
   }
 
-  const safeName = (input.name || "profiel").replace(/[^\w\-]+/g,"_").slice(0,40);
+   const safeName = (input.name || "profiel").replace(/[^\w\-]+/g,"_").slice(0,40);
   doc.save(`astro_numerologie_${safeName}_${input.Y}-${String(input.M).padStart(2,"0")}-${String(input.D).padStart(2,"0")}.pdf`);
-}
+} // <-- sluit generatePdf() (precies één keer)
+
 btnCalc.addEventListener("click", calculate);
 btnPdf.addEventListener("click", generatePdf);
 
