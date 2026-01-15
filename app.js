@@ -38,6 +38,60 @@ function toSign(deg){
   return { sign: ZODIAC[idx], within };
 }
 function fmtDeg(deg){
+const JUPITER_TEXT = {
+  Ram: "Groei komt via initiatief, lef en het durven kiezen voor jezelf.",
+  Stier: "Groei komt via stabiliteit, geduld en het opbouwen van iets dat blijft.",
+  Tweelingen: "Groei komt via leren, netwerken, schrijven, praten en nieuwsgierig blijven.",
+  Kreeft: "Groei komt via emotionele veiligheid, zorg, intuïtie en een sterk thuisgevoel.",
+  Leeuw: "Groei komt via creatie, zichtbaarheid, leiderschap en spelen vanuit het hart.",
+  Maagd: "Groei komt via vaardigheden, verfijning, dienstbaarheid en praktische verbetering.",
+  Weegschaal: "Groei komt via samenwerking, diplomatie, schoonheid en balans in relaties.",
+  Schorpioen: "Groei komt via diepgang, eerlijkheid, transformatie en emotionele moed.",
+  Boogschutter: "Groei komt via visie, zingeving, reizen/leren en vertrouwen in het grotere plaatje.",
+  Steenbok: "Groei komt via verantwoordelijkheid, structuur, lange termijn en doelen realiseren.",
+  Waterman: "Groei komt via originaliteit, vernieuwing, community en denken buiten kaders.",
+  Vissen: "Groei komt via empathie, verbeelding, spiritualiteit en vertrouwen op innerlijk weten."
+};
+
+const SATURN_TEXT = {
+  Ram: "De les is tempo en impuls beheersen: kracht met richting in plaats van alleen snelheid.",
+  Stier: "De les is loslaten van controle/zekerheid: flexibiliteit ontwikkelen zonder onrust.",
+  Tweelingen: "De les is focus: minder versnippering, meer verdieping en afmaken wat je start.",
+  Kreeft: "De les is emotionele grenzen: niet alles dragen, maar bewust kiezen wat van jou is.",
+  Leeuw: "De les is ego vs. hart: eigenwaarde zonder afhankelijk te worden van bevestiging.",
+  Maagd: "De les is mildheid: perfectionisme ombuigen naar gezonde standaarden.",
+  Weegschaal: "De les is kiezen: harmonie zonder jezelf weg te cijferen of te blijven twijfelen.",
+  Schorpioen: "De les is vertrouwen: controle en wantrouwen transformeren naar openheid met grenzen.",
+  Boogschutter: "De les is realiteitszin: visie verbinden met discipline en concrete stappen.",
+  Steenbok: "De les is zachtheid: verantwoordelijkheid dragen zonder verkramping of hardheid.",
+  Waterman: "De les is verbinden: onafhankelijk blijven, maar niet emotioneel afstandelijk worden.",
+  Vissen: "De les is gronding: gevoeligheid kanaliseren zonder te verdwijnen in escapisme."
+};
+
+const LIFE_PATH_TEXT = {
+  1: "Levenspad 1 draait om zelfstandigheid, initiatief en je eigen koers durven volgen.",
+  2: "Levenspad 2 draait om samenwerking, sensitiviteit en de kracht van verbinding.",
+  3: "Levenspad 3 draait om expressie, creativiteit, communicatie en lichtheid brengen.",
+  4: "Levenspad 4 draait om structuur, betrouwbaarheid en iets opbouwen dat stevig staat.",
+  5: "Levenspad 5 draait om vrijheid, verandering, ervaring en leren door het leven zelf.",
+  6: "Levenspad 6 draait om zorg, verantwoordelijkheid, harmonie en heling in relaties/omgeving.",
+  7: "Levenspad 7 draait om verdieping, analyse, spiritualiteit en innerlijke waarheid zoeken.",
+  8: "Levenspad 8 draait om kracht, leiding, manifestatie en gezond omgaan met materie/ambitie.",
+  9: "Levenspad 9 draait om compassie, afronding, idealen en betekenisvol bijdragen.",
+  11: "Levenspad 11 (master) draait om intuïtie, inspiratie en het verwoorden van hogere inzichten.",
+  22: "Levenspad 22 (master) draait om groot bouwen: visie praktisch maken en duurzaam neerzetten.",
+  33: "Levenspad 33 (master) draait om compassie in actie: heling, onderwijs en dienstbaarheid."
+};
+
+function makeTalentAndLesson(jupiterSign, saturnSign) {
+  const talent = JUPITER_TEXT[jupiterSign] || "Groei komt via ontwikkeling van talent en vertrouwen.";
+  const lesson = SATURN_TEXT[saturnSign] || "De les is volwassen worden in grenzen, discipline en richting.";
+  return { talent, lesson };
+}
+
+function makeNumerologyThread(lifePath) {
+  return LIFE_PATH_TEXT[lifePath] || `Levenspad ${lifePath} vormt de rode draad in ontwikkeling en keuzes.`;
+}
   const d = norm360(deg);
   const whole = Math.floor(d);
   const min = Math.floor((d - whole) * 60);
