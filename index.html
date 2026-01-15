@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Astro + Numerologie Profiel Generator (intern)</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- jsPDF (PDF export) -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <header class="wrap">
+    <h1>Astro + Numerologie Profiel Generator <span class="pill">intern</span></h1>
+    <p class="muted">Rekent planeten + huizen + numerologie en exporteert naar PDF (5/10/15 pagina’s).</p>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card">
+      <h2>Invoer</h2>
+
+      <div class="formgrid">
+        <label>
+          Naam (optioneel)
+          <input id="name" type="text" placeholder="Bijv. M. Visser" autocomplete="name" />
+        </label>
+
+        <label>
+          Geboortedatum
+          <input id="date" type="date" autocomplete="bday" />
+        </label>
+
+        <label>
+          Geboortetijd
+          <input id="time" type="time" step="60" autocomplete="off" />
+        </label>
+
+        <label>
+          Timezone offset (uren)
+          <input id="tz" type="number" step="0.25" value="1" inputmode="decimal" />
+          <small class="muted">Nederland is meestal +1 (winter) of +2 (zomer).</small>
+        </label>
+
+        <label>
+          Latitude (breedtegraad)
+          <input id="lat" type="number" step="0.0001" placeholder="Bijv. 52.0907" inputmode="decimal" />
+        </label>
+
+        <label>
+          Longitude (lengtegraad)
+          <input id="lon" type="number" step="0.0001" placeholder="Bijv. 5.1214" inputmode="decimal" />
+        </label>
+
+        <label>
+          Geboorteplaats (tekst, optioneel)
+          <input id="place" type="text" placeholder="Bijv. Harmelen, NL" autocomplete="address-level2" />
+          <small class="muted">Alleen voor in het rapport (lat/lon blijft leidend).</small>
+        </label>
+
+        <label>
+          Horoscooptekening (png/jpg) – optioneel
+          <input id="chartImg" type="file" accept="image/png,image/jpeg" />
+          <small class="muted">Upload je chart-afbeelding. Die komt bovenaan in de PDF.</small>
+        </label>
+
+        <label>
+          Huizensysteem
+          <select id="hsys">
+            <option value="P">Placidus (P)</option>
+            <option value="W">Whole Sign (W)</option>
+            <option value="E">Equal (E)</option>
+            <option value="K">Koch (K)</option>
+          </select>
+        </label>
+
+        <label>
+          Pagina’s in PDF
+          <select id="pages">
+            <option value="5">5 (Basis)</option>
+            <option value="10">10 (Verdieping)</option>
+            <option value="15">15 (DeLuxe)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <button id="btnCalc" class="btn">Bereken</button>
+        <button id="btnPdf" class="btn btn2" disabled>Genereer PDF</button>
+      </div>
+
+      <p id="status" class="muted"></p>
+    </section>
+
+    <section class="card">
+      <h2>Resultaat (preview)</h2>
+
+      <div class="two">
+        <div>
+          <h3>Planeten</h3>
+          <table class="tbl" id="planetsTbl">
+            <thead>
+              <tr><th>Object</th><th>Positie</th><th>Teken</th></tr>
+            </thead>
+            <tbody><tr><td colspan="3" class="muted">Nog niets berekend.</td></tr></tbody>
+          </table>
+        </div>
+
+        <div>
+          <h3>Huizen (cusps)</h3>
+          <table class="tbl" id="housesTbl">
+            <thead>
+              <tr><th>Huis</th><th>Graad</th><th>Teken</th></tr>
+            </thead>
+            <tbody><tr><td colspan="3" class="muted">Nog niets berekend.</td></tr></tbody>
+          </table>
+
+          <div class="mini">
+            <div><strong>ASC:</strong> <span id="asc">—</span></div>
+            <div><strong>MC:</strong> <span id="mc">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Numerologie</h3>
+      <div class="nums" id="nums">
+        <div class="chip">Life Path: <strong id="lp">—</strong></div>
+        <div class="chip">Dag: <strong id="nday">—</strong></div>
+        <div class="chip">Maand: <strong id="nmon">—</strong></div>
+        <div class="chip">Jaar: <strong id="nyear">—</strong></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap muted small">
+    <p>Interne tool. Gebruik voor jezelf. (Als je dit ooit commercieel verspreidt: check Swiss Ephemeris licensing.)</p>
+  </footer>
+
+  <script type="module" src="app.js?v=20260115_fullA"></script>
+</body>
+</html>
