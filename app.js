@@ -365,8 +365,110 @@ function generatePdf(){
 
   // Extra pagina’s (4..N): placeholders die jij later kan vullen
   // (handig: je kunt hier later automatisch tekstmodules aanhaken)
-  for(let p=4; p<=totalPages; p++){
-    doc.addPage();
+// Pagina 4: Karakter & Dynamiek (automatisch)
+if (totalPages >= 4) {
+  doc.addPage();
+  y = 18;
+
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(14);
+  doc.text("Karakter & Dynamiek", marginX, y);
+  y += 10;
+
+  doc.setFont("helvetica","normal");
+  doc.setFontSize(11);
+
+  const sunLon   = planets.find(p=>p.label==="Zon")?.lon;
+  const moonLon  = planets.find(p=>p.label==="Maan")?.lon;
+  const venusLon = planets.find(p=>p.label==="Venus")?.lon;
+  const marsLon  = planets.find(p=>p.label==="Mars")?.lon;
+
+  const sunSign  = toSign(sunLon).sign;
+  const moonSign = toSign(moonLon).sign;
+  const venusSign= toSign(venusLon).sign;
+  const marsSign = toSign(marsLon).sign;
+  const ascSign  = toSign(ascLon).sign;
+
+  const coreSentence = makeCoreSentence(sunSign, ascSign, numerology.lifePath);
+
+  y = addWrappedText(doc, `Kernzin\n${coreSentence}\n`, marginX, y, 180, 5);
+
+  y = addWrappedText(doc,
+    `Emotionele stijl (${moonSign})\n${SIGN_TEXT[moonSign]?.emotion || "Emoties worden beleefd vanuit persoonlijke veiligheid en innerlijke verwerking."}\n`,
+    marginX, y, 180, 5
+  );
+
+  y = addWrappedText(doc,
+    `Relatiebehoefte (${venusSign})\n${SIGN_TEXT[venusSign]?.relation || "In relaties is verbinding, vertrouwen en wederzijds begrip belangrijk."}\n`,
+    marginX, y, 180, 5
+  );
+
+  y = addWrappedText(doc,
+    `Actie & wil (${marsSign})\n${SIGN_TEXT[marsSign]?.action || "Actie wordt gestuurd door motivatie, richting en volharding."}`,
+    marginX, y, 180, 5
+  );
+}
+
+// Pagina 5: Talenten & Uitdagingen (automatisch)
+if (totalPages >= 5) {
+  doc.addPage();
+  y = 18;
+
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(14);
+  doc.text("Talenten & Uitdagingen", marginX, y);
+  y += 10;
+
+  doc.setFont("helvetica","normal");
+  doc.setFontSize(11);
+
+  const jupiterLon = planets.find(p=>p.label==="Jupiter")?.lon;
+  const saturnLon  = planets.find(p=>p.label==="Saturnus")?.lon;
+
+  const jupiterSign = toSign(jupiterLon).sign;
+  const saturnSign  = toSign(saturnLon).sign;
+
+  const talent = (typeof JUPITER_TEXT !== "undefined" && JUPITER_TEXT[jupiterSign])
+    ? JUPITER_TEXT[jupiterSign]
+    : "Groei komt via ontwikkeling van talent, vertrouwen en het benutten van kansen.";
+
+  const lesson = (typeof SATURN_TEXT !== "undefined" && SATURN_TEXT[saturnSign])
+    ? SATURN_TEXT[saturnSign]
+    : "De les is volwassen worden in grenzen, discipline en het bouwen van structuur.";
+
+  const numThread = (typeof makeNumerologyThread === "function")
+    ? makeNumerologyThread(numerology.lifePath)
+    : `Levenspad ${numerology.lifePath} vormt de rode draad in ontwikkeling en keuzes.`;
+
+  y = addWrappedText(doc, `Talent & Groei (Jupiter in ${jupiterSign})\n${talent}\n`, marginX, y, 180, 5);
+  y = addWrappedText(doc, `Valkuil & Les (Saturnus in ${saturnSign})\n${lesson}\n`, marginX, y, 180, 5);
+  y = addWrappedText(doc, `Numerologische rode draad\n${numThread}\n`, marginX, y, 180, 5);
+
+  y = addWrappedText(doc,
+    "Afsluiting\nGebruik dit profiel als kompas voor zelfinzicht en bewustwording. Het beschrijft aanleg en dynamiek, geen vaststaand lot.",
+    marginX, y, 180, 5
+  );
+}
+
+// Extra pagina’s (6..N): placeholders (alleen voor 10/15)
+for (let p = 6; p <= totalPages; p++) {
+  doc.addPage();
+  y = 18;
+  doc.setFont("helvetica","bold"); doc.setFontSize(14);
+  doc.text(`Interpretatie / Notities (pagina ${p}/${totalPages})`, marginX, y);
+  y += 10;
+
+  doc.setFont("helvetica","normal"); doc.setFontSize(11);
+  y = addWrappedText(doc,
+    "Gebruik deze pagina om je eigen duiding te schrijven. Suggestie-structuur:\n" +
+    "• Thema’s per huis (4e/7e/10e)\n" +
+    "• Eventuele aspecten (later uit te breiden)\n" +
+    "• Praktische reflectievragen\n\n" +
+    "Tip: plak hier later jouw vaste tekstblokken.",
+    marginX, y, 180, 5
+  );
+}
+
     y = 18;
     doc.setFont("helvetica","bold"); doc.setFontSize(14);
     doc.text(`Interpretatie / Notities (pagina ${p}/${totalPages})`, marginX, y);
