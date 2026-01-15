@@ -169,6 +169,36 @@ const SIGN_TEXT = {
     key:"Sleutel: gronding + grenzen maken je gave veilig en krachtig."
   }
 };
+// 2b) Jupiter & Saturnus duiding (voor pagina 5)
+const JUPITER_TEXT = {
+  Ram: "Groei komt via initiatief, lef en het durven kiezen voor jezelf.",
+  Stier: "Groei komt via stabiliteit, geduld en het opbouwen van iets dat blijft.",
+  Tweelingen: "Groei komt via leren, netwerken, schrijven, praten en nieuwsgierig blijven.",
+  Kreeft: "Groei komt via emotionele veiligheid, zorg, intuïtie en een sterk thuisgevoel.",
+  Leeuw: "Groei komt via creatie, zichtbaarheid, leiderschap en spelen vanuit het hart.",
+  Maagd: "Groei komt via vaardigheden, verfijning, dienstbaarheid en praktische verbetering.",
+  Weegschaal: "Groei komt via samenwerking, diplomatie, schoonheid en balans in relaties.",
+  Schorpioen: "Groei komt via diepgang, eerlijkheid, transformatie en emotionele moed.",
+  Boogschutter: "Groei komt via visie, zingeving, reizen/leren en vertrouwen in het grotere plaatje.",
+  Steenbok: "Groei komt via verantwoordelijkheid, structuur, lange termijn en doelen realiseren.",
+  Waterman: "Groei komt via originaliteit, vernieuwing, community en denken buiten kaders.",
+  Vissen: "Groei komt via empathie, verbeelding en vertrouwen op innerlijk weten."
+};
+
+const SATURN_TEXT = {
+  Ram: "De les is tempo en impuls beheersen: kracht met richting in plaats van alleen snelheid.",
+  Stier: "De les is loslaten van controle/zekerheid: flexibiliteit ontwikkelen zonder onrust.",
+  Tweelingen: "De les is focus: minder versnippering, meer verdieping en afmaken wat je start.",
+  Kreeft: "De les is emotionele grenzen: niet alles dragen, maar bewust kiezen wat van jou is.",
+  Leeuw: "De les is ego vs. hart: eigenwaarde zonder afhankelijk te worden van bevestiging.",
+  Maagd: "De les is mildheid: perfectionisme ombuigen naar gezonde standaarden.",
+  Weegschaal: "De les is kiezen: harmonie zonder jezelf weg te cijferen of te blijven twijfelen.",
+  Schorpioen: "De les is vertrouwen: controle en wantrouwen transformeren naar openheid met grenzen.",
+  Boogschutter: "De les is realiteitszin: visie verbinden met discipline en concrete stappen.",
+  Steenbok: "De les is zachtheid: verantwoordelijkheid dragen zonder verkramping of hardheid.",
+  Waterman: "De les is verbinden: onafhankelijk blijven, maar niet emotioneel afstandelijk worden.",
+  Vissen: "De les is gronding: gevoeligheid kanaliseren zonder te verdwijnen in escapisme."
+};
 
 // 3) Huizen focus: 1/4/7/10
 const HOUSE_MEANING = {
